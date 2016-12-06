@@ -34,7 +34,7 @@ function matchQuery(mediaQuery, values) {
             var feature  = expression.feature,
                 modifier = expression.modifier,
                 expValue = expression.value,
-                value    = values[feature];
+                value    = values && values[feature];
 
             // Missing or falsy values don't match.
             if (!value) { return false; }
@@ -85,6 +85,7 @@ function matchQuery(mediaQuery, values) {
 }
 
 function parseQuery(mediaQuery) {
+    if (!mediaQuery.split) return [];
     return mediaQuery.split(',').map(function (query) {
         query = query.trim();
 
